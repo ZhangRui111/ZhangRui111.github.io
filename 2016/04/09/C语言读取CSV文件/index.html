@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | ZhangRui</title>
+  <title>C语言读取CSV文件 | ZhangRui</title>
   <meta name="author" content="ZhangRui">
   
   <meta name="description" content="Fighting or Dying">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Hello World"/>
+  <meta property="og:title" content="C语言读取CSV文件"/>
   <meta property="og:site_name" content="ZhangRui"/>
 
   
@@ -51,25 +51,77 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-04-08T12:17:32.642Z"><a href="/2016/04/08/hello-world/">2016-04-08</a></time>
+        <time datetime="2016-04-09T12:29:35.000Z"><a href="/2016/04/09/C语言读取CSV文件/">2016-04-09</a></time>
       
       
   
-    <h1 class="title">Hello World</h1>
+    <h1 class="title">C语言读取CSV文件</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Welcome to [Hexo]<a id="more"></a><br>(<a href="https://hexo.io/)!" target="_blank" rel="external">https://hexo.io/)!</a> This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h1 id="ZhangRui111-github-io"><a href="#ZhangRui111-github-io" class="headerlink" title="ZhangRui111.github.io"></a>ZhangRui111.github.io</h1><p>　　最近笔者参加了华为软件公开赛，涉及到需要读取CSV文件，考虑到CSV文件在程序猿的世界经常用到，便花时间研究下，本来以为很简单的文件读取，确是让我大费周章，究其原因，我觉得有两个：</p>
+<ul>
+<li>1、笔者最近主要精力放在了学习Android上，对于C/C++的语法有所生疏，看来，要成为一名合格的程序员还有很长的路要走。</li>
+<li>2、另一个就太坑了，使用中文搜索边搜索边写代码过了三个多小时，最后又回到了原点，然而，使用纯英文搜索和Google，借鉴了一个<a href="http://www.ehow.com/how_6929534_read-csv-file-c.html" target="_blank" rel="external">英文网页</a>，分分钟就搞定了，果然：不想看英文、不会用英文搜索的程序猿不是好的攻城狮[Doge][Doge][Doge]，哈哈，个人观点，其实中文搜索和英文搜索还是互有优劣的。<br>下面进入正题：<blockquote>
+<p>什么是CSV（摘自<a href="https://zh.wikipedia.org/wiki/%E9%80%97%E5%8F%B7%E5%88%86%E9%9A%94%E5%80%BC" target="_blank" rel="external">维基百科</a>）<br>　　CSV是一种通用的、相对简单的文件格式，被用户、商业和科学广泛应用。最广泛的应用是在程序之间转移表格数据，而这些程序本身是在不兼容的格式上进行操作的（往往是私有的和/或无规范的格式）。因为大量程序都支持某种CSV变体，至少是作为一种可选择的输入/输出格式。<br>　　“CSV”并不是一种单一的、定义明确的格式（尽管RFC 4180有一个被通常使用的定义）。因此在实践中，术语“CSV”泛指具有以下特征的任何文件：<br>纯文本，使用某个字符集，比如ASCII、Unicode、EBCDIC或GB2312（简体中文环境）等；</p>
+<ul>
+<li>1 由记录组成（典型的是每行一条记录）；</li>
+<li>2 每条记录被分隔符分隔为字段（典型分隔符有逗号、分号或制表符；有时分隔符可以包括可选的空格）；</li>
+<li>3 每条记录都有同样的字段序列。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>　　简单来说呢？就是每个数据之间以相同的分隔符（逗号、分号等）区分，数据的类型可以不同、长度任意。对应每一列的数据要有相同的含义，不然这个文件就是无意义的。</p>
+<hr>
+<p>  最后，奉上笔者亲自编译测试通过的代码：</p>
+<pre><code>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define BUFFER_SIZE 128
+#define SHORTLENGTH 128
+#define LONGLENGTH 1024
+
+typedef struct DataTopo{
+    int lineNum;
+    int startPoint;
+    int endPoint;
+    int weight;
+}DataTopo;
+
+typedef struct DataDemand{
+    int startPDemand;
+    int endPDemand;
+    char *lineP;
+}DataDemand;
+
+int main(int argc,char* argv[])
+{
+    FILE *fpTopo,*fpDemand;
+    DataTopo mDataTopo[LONGLENGTH];
+    DataDemand mDataDemand;
+    int count = 0,i = 0;
+
+    if(argc < 2){
+        printf("Please input the Topo File&Demand File!\n");
+        return 1;
+    }
+    if(argc == 2){
+        printf("Please input the Demand File!\n");
+        return 1;
+    }
+
+    char buf[BUFFER_SIZE];
+    fpTopo = fopen(argv[1],"rt");
+    if(fpTopo == NULL){
+        printf("Cant't find the Topo file!\n");
+        exit(1);
+    }
+    while(fpTopo != EOF && count<longlength){ fgets(buf,sizeof(buf),fptopo);="" char="" *tok="strtok(buf," ",");="" mdatatopo[count].linenum="atoi(tok);" tok="strtok(NULL," mdatatopo[count].startpoint="atoi(tok);" mdatatopo[count].endpoint="atoi(tok);" mdatatopo[count].weight="atoi(tok);" if(mdatatopo[count].startpoint="=" 0&&mdatatopo[count].endpoint="=" 0&&mdatatopo[count].weight="=" 0){="" break;="" }="" count++;="" printf("\ncount="%d\n",count);" *int="" i="0;" for(;i<count;i++){="" printf("%d,%d,%d,%d\n",mdatatopo[i].linenum,mdatatopo[i].startpoint,mdatatopo[i].endpoint,mdatatopo[i].weight);="" }*="" bufdemand[shortlength];="" fpdemand="fopen(argv[2],"rt");" if(fpdemand="=" null){="" printf("cant't="" find="" the="" demand="" file!\n");="" exit(1);="" fgets(bufdemand,sizeof(bufdemand),fpdemand);="" mdatademand.startpdemand="atoi(tok);" mdatademand.endpdemand="atoi(tok);" mdatademand.linep="tok;" printf("%d,%d,%s",mdatademand.startpdemand,mdatademand.endpdemand,mdatademand.linep);="" int="" linenum[count],startpoint[count],endpoint[count],weight[count];="" linenum[i]="mDataTopo[i].lineNum;" startpoint[i]="mDataTopo[i].startPoint;" endpoint[i]="mDataTopo[i].endPoint;" weight[i]="mDataTopo[i].weight;" *for(i="0;i<count;i++){" printf("%d="" ",linenum[i]);="" ",startpoint[i]);="" ",endpoint[i]);="" printf("%d\n",weight[i]);="" printf("%d,%d,%s",mdatademand.startpdemand,mdatademand.endpdemand,mdatademand.linep);*="" return="" 0;="" <="" code=""></longlength){></string.h></stdlib.h></stdio.h></code></pre>
 
       
     </div>
@@ -77,6 +129,11 @@
       
         
         
+  
+  <div class="tags">
+    <a href="/tags/C-C/">C/C++</a>
+  </div>
+
         
   <div class="addthis addthis_toolbox addthis_default_style">
     
@@ -117,7 +174,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://yoursite.com/2016/04/08/hello-world/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://yoursite.com/2016/04/09/C语言读取CSV文件/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
