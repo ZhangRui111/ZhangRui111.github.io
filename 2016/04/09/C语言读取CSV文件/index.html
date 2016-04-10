@@ -210,6 +210,39 @@ if(mDataTopo[count].startPoint == 0&&mDataTopo[count].endPoint == 0&&mDataTopo[c
 </code></pre>
 
 <p><em>关于CSV文档是否有EOF标记，笔者的确不太清楚，在网上查了一下也没有找到特别权威的答复，这里恳请读者指正。笔者在测试时发现，当有效数据读取完成时，读取不会立刻停止，反而在后面三列会读出许多零(NULL),所以根据语法顺序，启用了这么一个中断While()循环的操作</em></p>
+<hr>
+<h3 id="写数据到-csv文件"><a href="#写数据到-csv文件" class="headerlink" title="写数据到.csv文件"></a>写数据到.csv文件</h3><p>话不多说，直接上代码，挺简单的，应该都能看懂—-<a href="http://codingstreet.com/create-csv-file-in-c/#" target="_blank" rel="external">参考网站</a></p>
+<pre><code>
+#include<stdio.h>
+#include<string.h>
+
+void create_marks_csv(char *filename,int a[][3],int n,int m){
+    printf("\n Creating %s.csv file",filename);
+    FILE *fp;
+    int i,j;
+    filename=strcat(filename,".csv");
+    fp=fopen(filename,"w+");
+    fprintf(fp,"Student Id, Physics, Chemistry, Maths");
+    for(i=0;i < m;i++){
+        fprintf(fp,"\n%d",i+1);
+        for(j=0;j < n;j++)
+            fprintf(fp,",%d ",a[i][j]);
+    }
+    fclose(fp);
+    printf("\n %sfile created",filename);
+}
+
+int main(){
+    int a[3][3]={{50,50,50},{60,60,60},{70,70,70}};
+    char str[100];
+    printf("\n Enter the filename :");
+    gets(str);
+    create_marks_csv(str,a,3,3);
+    return 0;
+}
+
+</string.h></stdio.h></code></pre>
+
 <h4 id="博主原创博文，转载请注明出处http-zhangrui111-github-io"><a href="#博主原创博文，转载请注明出处http-zhangrui111-github-io" class="headerlink" title="博主原创博文，转载请注明出处http://zhangrui111.github.io/"></a>博主原创博文，转载请注明出处<a href="http://zhangrui111.github.io/2016/04/09/C%E8%AF%AD%E8%A8%80%E8%AF%BB%E5%8F%96CSV%E6%96%87%E4%BB%B6/#more">http://zhangrui111.github.io/</a></h4>
       
     </div>
